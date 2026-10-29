@@ -46,7 +46,7 @@ function formatDate(date, fromFormat, toFormat) {
   }
 
   if (fromFormat[fromYearIndex].length < toFormat[toYearIndex].length) {
-    if (Number(dateSplit[toYearIndex]) < 27) {
+    if (Number(dateSplit[toYearIndex]) < 30) {
       dateSplit[toYearIndex] = 2000 + Number(dateSplit[toYearIndex]);
     } else {
       dateSplit[toYearIndex] = 1900 + Number(dateSplit[toYearIndex]);
@@ -54,18 +54,12 @@ function formatDate(date, fromFormat, toFormat) {
   }
 
   if (fromFormat[fromYearIndex].length > toFormat[toYearIndex].length) {
-    if (Number(dateSplit[toYearIndex]) < 2027) {
-      if (Number(dateSplit[toYearIndex]) - 2000 < 0) {
-        dateSplit[toYearIndex] = Number(dateSplit[toYearIndex]) - 1900;
-      } else {
-        dateSplit[toYearIndex] = Number(dateSplit[toYearIndex]) - 2000;
-      }
-    }
+    dateSplit[toYearIndex] = dateSplit[toYearIndex] % 100;
   }
 
-  const formattedDate = dateSplit.join(newSeparateSymbol);
+  const formattedDate = dateSplit;
 
-  return formattedDate;
+  return formattedDate.join(newSeparateSymbol);
 }
 
 module.exports = formatDate;
